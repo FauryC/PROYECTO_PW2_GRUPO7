@@ -83,3 +83,40 @@
         </article>
     </div>
 </section>
+
+<script>
+(function () {
+    let currentSlide = 0;
+    let autoplayTimer = null;
+    const AUTOPLAY_DELAY = 4000;
+
+    function moveSlide(direction) {
+        const images = document.querySelector('#carousel .carousel-images');
+        const items  = document.querySelectorAll('#carousel .carousel-item');
+        if (!images || items.length === 0) return;
+
+        currentSlide = (currentSlide + direction + items.length) % items.length;
+        images.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    }
+
+    function startAutoplay() {
+        autoplayTimer = setInterval(function () { moveSlide(1); }, AUTOPLAY_DELAY);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayTimer);
+    }
+
+    // Expose moveSlide globally (used by inline onclick)
+    window.moveSlide = moveSlide;
+
+    // Start autoplay and pause on hover
+    document.addEventListener('DOMContentLoaded', function () {
+        const carousel = document.getElementById('carousel');
+        if (!carousel) return;
+        startAutoplay();
+        carousel.addEventListener('mouseenter', stopAutoplay);
+        carousel.addEventListener('mouseleave', startAutoplay);
+    });
+})();
+</script>

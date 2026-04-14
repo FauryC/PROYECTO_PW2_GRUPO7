@@ -1,94 +1,126 @@
-﻿
+// =============================================
+// Variables LESS - Nosotros
+// =============================================
+@rojo-af:          #d11212;
+@rojo-af-oscuro:   #a70e0e;
+@azul-af:          #003366;
+@texto:            #333333;
+@fondo-claro:      #ffffff;
+@font-serif:       "Georgia", "Times New Roman", serif;
+@trans-normal:     0.25s ease;
+
+// =============================================
+// CSS custom properties
+// =============================================
 :root {
-    --rojo-af: #d11212;
-    --rojo-af-oscuro: #a70e0e;
-    --azul-af: #003366;
-    --texto: #333333;
-    --fondo-claro: #ffffff;
+    --rojo-af:      @rojo-af;
+    --rojo-af-oscuro: @rojo-af-oscuro;
+    --azul-af:      @azul-af;
+    --texto:        @texto;
+    --fondo-claro:  @fondo-claro;
 }
 
-main {
-    margin-top: 120px; 
-}
-
+// =============================================
+// Título elegante
+// =============================================
 .titulo-elegante {
-    font-family: "Georgia", "Times New Roman", serif;
+    font-family: @font-serif;
     font-size: 2.3em;
     font-style: italic;
     letter-spacing: 1px;
     text-align: center;
-    color: var(--rojo-af);
+    color: @rojo-af;
     margin: 40px 0 20px;
 }
 
+// =============================================
+// Sección Hero - Sobre AF
+// =============================================
 .sobre-af {
     position: relative;
-    width: 100vw;                
+    width: 100vw;
     left: 50%;
-    margin-left: -50vw;          
+    margin-left: -50vw;
     margin-right: -50vw;
     overflow: hidden;
-
-background-image: url("../SRC/FONDO.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    padding: 80px 0 110px;       
+    background-color: @azul-af;
+    padding: 80px 0 110px;
     color: #ffffff;
+    animation: fadeInDown 0.9s ease-out;
+
+    @media (max-width: 992px) {
+        padding: 70px 0 90px;
+    }
+
+    &-image {
+        display: none;
+    }
+
+    &-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 1;
+    }
+
+    &-content {
+        position: relative;
+        z-index: 2;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+
+        @media (max-width: 992px) {
+            text-align: center;
+        }
+
+        .titulo-elegante {
+            color: #ffffff;
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: 10px;
+
+            @media (max-width: 992px) {
+                text-align: center;
+            }
+        }
+
+        .intro, p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        h2.titulo-elegante:nth-of-type(2) {
+            margin-top: 30px;
+        }
+    }
 }
 
-.sobre-af-image {
-    display: none;
-}
-
-.sobre-af-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 1;
-}
-
-.sobre-af-content {
-    position: relative;
-    z-index: 2;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-.sobre-af-content .titulo-elegante {
-    color: #ffffff;
-    text-align: left;
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-.sobre-af-content .intro,
-.sobre-af-content p {
-    font-size: 1.08rem;
-    line-height: 1.8;
-    max-width: 900px;
-    margin-bottom: 10px;
-}
-
-.sobre-af-content h3 {
-    font-size: 1.2rem;
-    margin-top: 18px;
-    margin-bottom: 8px;
-}
-
-.sobre-af-content h2.titulo-elegante:nth-of-type(2) {
-    margin-top: 30px;
-}
-
+// =============================================
+// Grid nosotros
+// =============================================
 .nosotros-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 24px;
     margin-top: 20px;
+
+    @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+    }
 }
 
+// =============================================
+// Tarjetas de misión/valores
+// =============================================
 .nosotros-card {
     border-radius: 16px;
     padding: 22px 22px 20px;
@@ -97,76 +129,87 @@ background-image: url("../SRC/FONDO.png");
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.4);
-    color: var(--texto);
+    color: @texto;
     position: relative;
     overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.3s ease;
-}
+    transition: transform @trans-normal, box-shadow 0.3s ease;
+    animation: fadeUp 0.7s ease-out;
 
-.nosotros-card h3 {
-    color: var(--azul-af);
-    margin-bottom: 8px;
-    font-size: 1.3rem;
-}
+    h3 {
+        color: @azul-af;
+        margin-bottom: 8px;
+        font-size: 1.3rem;
+    }
 
-.nosotros-card p,
-.nosotros-card li {
-    font-size: 1.02rem;
-    line-height: 1.6;
+    p, li {
+        font-size: 1.02rem;
+        line-height: 1.6;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.25), transparent 60%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+
+        &::before {
+            opacity: 1;
+        }
+    }
 }
 
 .valores-lista {
     list-style: none;
     padding-left: 0;
     margin: 0;
+
+    li {
+        margin-bottom: 6px;
+    }
 }
 
-.valores-lista li {
-    margin-bottom: 6px;
-}
-
-.nosotros-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top left, rgba(255,255,255,0.25), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-.nosotros-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
-}
-
-.nosotros-card:hover::before {
-    opacity: 1;
-}
-
+// =============================================
+// CTA Inscripción
+// =============================================
 .cta-inscripcion {
-    background-color: var(--azul-af);
+    background-color: @azul-af;
     padding: 60px 20px;
     text-align: center;
     color: #ffffff;
     margin: 60px auto 50px;
+
+    h3 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 22px;
+        max-width: 700px;
+        margin-inline: auto;
+    }
+
+    @media (max-width: 768px) {
+        margin: 40px auto 35px;
+        padding: 40px 16px;
+    }
 }
 
-.cta-inscripcion h3 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
-
-.cta-inscripcion p {
-    font-size: 1.1rem;
-    margin-bottom: 22px;
-    max-width: 700px;
-    margin-inline: auto;
-}
-
+// =============================================
+// Botón primario
+// =============================================
 .btn-primary {
     display: inline-block;
-    background-color: var(--rojo-af);
+    background-color: @rojo-af;
     color: #ffffff;
     padding: 14px 32px;
     font-size: 1.05rem;
@@ -175,32 +218,43 @@ background-image: url("../SRC/FONDO.png");
     font-weight: 600;
     letter-spacing: 0.03em;
     transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        background-color: @rojo-af-oscuro;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+    }
 }
 
-.btn-primary:hover {
-    background-color: var(--rojo-af-oscuro);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
-}
-
+// =============================================
+// Bloque nosotros (secciones interiores)
+// =============================================
 .nosotros-bloque {
     max-width: 1100px;
     margin: 50px auto;
     padding: 0 20px;
-}
+    animation: fadeIn 0.9s ease-out;
 
-.nosotros-bloque .titulo-elegante {
-    color: var(--rojo-af);
+    .titulo-elegante {
+        color: @rojo-af;
+    }
+
+    @media (max-width: 768px) {
+        margin: 35px auto;
+    }
 }
 
 .nosotros-intro-text {
     font-size: 1.05rem;
     line-height: 1.7;
-    color: var(--texto);
+    color: @texto;
     text-align: center;
     margin-top: 8px;
 }
 
+// =============================================
+// Grid del equipo
+// =============================================
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -210,18 +264,39 @@ background-image: url("../SRC/FONDO.png");
 
 .team-card {
     position: relative;
-    background: var(--fondo-claro);
+    background: @fondo-claro;
     border-radius: 14px;
     padding: 20px 18px 22px;
     text-align: center;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.3s ease;
-}
+    transition: transform @trans-normal, box-shadow 0.3s ease;
+    animation: fadeUp 0.7s ease-out;
 
-.team-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+    }
+
+    h3 {
+        font-size: 1.1rem;
+        color: @azul-af;
+        margin: 8px 0 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .cargo {
+        font-size: 0.95rem;
+        color: #666666;
+        margin-bottom: 4px;
+    }
+
+    .mail {
+        font-size: 0.9rem;
+        color: @rojo-af;
+        word-break: break-word;
+    }
 }
 
 .team-img {
@@ -239,83 +314,21 @@ background-image: url("../SRC/FONDO.png");
     margin-bottom: 12px;
 }
 
-.team-card h3 {
-    font-size: 1.1rem;
-    color: var(--azul-af);
-    margin: 8px 0 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
+// =============================================
+// Base página
+// =============================================
+main {
+    margin-top: 120px;
 
-.team-card .cargo {
-    font-size: 0.95rem;
-    color: #666666;
-    margin-bottom: 4px;
-}
-
-.team-card .mail {
-    font-size: 0.9rem;
-    color: var(--rojo-af);
-    word-break: break-word;
-}
-
-@media (max-width: 992px) {
-    .sobre-af {
-        background-attachment: scroll;
-        padding: 70px 0 90px;
-    }
-
-    .sobre-af-content .titulo-elegante {
-        text-align: center;
-    }
-
-    .sobre-af-content {
-        text-align: center;
-    }
-
-    .nosotros-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    main {
+    @media (max-width: 768px) {
         margin-top: 110px;
     }
-
-    .cta-inscripcion {
-        margin: 40px auto 35px;
-        padding: 40px 16px;
-    }
-
-    .nosotros-bloque {
-        margin: 35px auto;
-    }
 }
 
-.hero-nosotros {
-    animation: fadeInDown 0.8s ease-out;
-}
-
+// =============================================
+// Animaciones de entrada
+// =============================================
+.hero-nosotros                                   { animation: fadeInDown 0.8s ease-out; }
 .seccion-nosotros,
 .bloque-historia,
-.bloque-mision-vision {
-    animation: fadeIn 0.9s ease-out;
-}
-
-.sobre-af {
-    animation: fadeInDown 0.9s ease-out;
-}
-
-.nosotros-card {
-    animation: fadeUp 0.7s ease-out;
-}
-
-.nosotros-bloque {
-    animation: fadeIn 0.9s ease-out;
-}
-
-.team-card {
-    animation: fadeUp 0.7s ease-out;
-}
-
+.bloque-mision-vision                            { animation: fadeIn 0.9s ease-out; }
